@@ -68,7 +68,7 @@ if __name__ == "__main__":
 
     # Data
     transform = Compose([ToTensor(), Normalize((0.5,), (0.5,))])
-    train_data = FashionMNIST(root='/scratch/mch/bverena/FashionMNIST', train=True, download=True, transform=transform)
+    train_data = FashionMNIST(root='./data', train=True, download=True, transform=transform)
     train_dataloader = DataLoader(train_data, batch_size=128, shuffle=True)
 
     # Training
