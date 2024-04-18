@@ -11,4 +11,5 @@
 conda activate ddp_starter
 
 # Run the script
-srun -ul python test_ddp.py
+#srun -ul python test_ddp.py
+srun -ul python test_imageclassifier.py
