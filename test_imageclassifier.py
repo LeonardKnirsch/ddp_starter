@@ -7,7 +7,7 @@ from torchvision.transforms import ToTensor, Normalize, Compose
 from torch.utils.data import DataLoader
 from torch.utils.data import DataLoader, TensorDataset
 import lightning.pytorch as pl
-
+import time
 
 class IrisDataModule(pl.LightningDataModule):
     """Data module for the Iris dataset."""
@@ -60,8 +60,11 @@ if __name__ == "__main__":
     """Main function to set up and train the model."""
 
     #torch.set_float32_matmul_precision('high')
-    print("num_devices: ", torch.cuda.device_count())
-    print("num_nodes: ", int(os.environ.get('SLURM_JOB_NUM_NODES')))
+    device_count = torch.cuda.device_count()
+    num_nodes = int(os.environ.get('SLURM_JOB_NUM_NODES'))
+
+    print("num_devices: ", device_count)
+    print("num_nodes: ",num_nodes)
 
     # Data
     transform = Compose([ToTensor(), Normalize((0.5,), (0.5,))])
@@ -73,11 +76,15 @@ if __name__ == "__main__":
 
     trainer = pl.Trainer(
         max_epochs=10,
-        devices=torch.cuda.device_count(),
+        devices=device_count,
         accelerator='cuda',
         strategy="ddp",
         log_every_n_steps=1,
-        num_nodes=int(os.environ.get('SLURM_JOB_NUM_NODES', 1))
+        num_nodes=num_nodes,
     )
     #trainer.fit(model, data)
+    start = time.time()
     trainer.fit(model, train_dataloaders=train_dataloader)
+    end = time.time()
+    total = end - start
+    print(f"{num_nodes*device_count} GPUs took {total} seconds.")
