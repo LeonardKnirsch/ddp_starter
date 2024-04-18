@@ -4,7 +4,7 @@
 #SBATCH --error=lightning_logs/pl_ddp_test.err
 #SBATCH --nodes=2
 #SBATCH --ntasks-per-node=4
-#SBATCH --time=01:00:00
+#SBATCH --time=00:10:00
 #SBATCH --partition=normal
 
 # Load necessary modules
