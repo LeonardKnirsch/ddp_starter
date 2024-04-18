@@ -6,7 +6,6 @@
 #SBATCH --ntasks-per-node=4
 #SBATCH --time=01:00:00
 #SBATCH --partition=normal
-#SBATCH --account=s83
 
 # Load necessary modules
 conda activate ddp_starter
