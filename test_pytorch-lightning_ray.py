@@ -1,5 +1,4 @@
 import os
-import tempfile
 import time
 
 import torch
@@ -43,8 +42,7 @@ num_nodes = int(os.environ.get('SLURM_JOB_NUM_NODES'))
 def train_func():
     # Data
     transform = Compose([ToTensor(), Normalize((0.5,), (0.5,))])
-    data_dir = os.path.join(tempfile.gettempdir(), "data")
-    train_data = FashionMNIST(root=data_dir, train=True, download=True, transform=transform)
+    train_data = FashionMNIST(root='./data', train=True, download=True, transform=transform)
     train_dataloader = DataLoader(train_data, batch_size=128, shuffle=True)
 
     # Training
