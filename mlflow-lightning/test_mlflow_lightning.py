@@ -42,6 +42,17 @@ class ImageClassifier(pl.LightningModule):
         self.log("loss", loss, on_step=True, prog_bar=True)
         return loss
 
+    def validation_step(self,batch,batch_idx):
+        x, y = batch
+        outputs = self.forward(x)
+        loss = self.criterion(outputs, y)
+        correct = outputs.argmax(1) == y
+        self.log("loss", loss, on_step=True, prog_bar=True)
+        self.log("correct", correct.sum()/len(x), on_step=True, prog_bar=True)
+        return loss
+
+
+
     def configure_optimizers(self):
         return torch.optim.Adam(self.model.parameters(), lr=0.001)
 
@@ -59,7 +70,8 @@ if __name__ == "__main__":
     transform = Compose([ToTensor(), Normalize((0.5,), (0.5,))])
     train_data = FashionMNIST(root='./data', train=True, download=True, transform=transform)
     train_dataloader = DataLoader(train_data, batch_size=128, shuffle=True)
-
+    test_data = FashionMNIST(root="./data", train=False,download=True, transform=transform)
+    test_loader = DataLoader(test_data, batch_size=128, shuffle=True)
     # Training
     model = ImageClassifier()
 
@@ -73,7 +85,7 @@ if __name__ == "__main__":
     )
     #trainer.fit(model, data)
     start = time.time()
-    trainer.fit(model, train_dataloaders=train_dataloader)
+    trainer.fit(model, train_dataloaders=train_dataloader,val_dataloaders=test_loader)
     end = time.time()
     total = end - start
     print(f"{num_nodes*device_count} GPUs took {total} seconds.")

@@ -7,8 +7,8 @@
 #SBATCH --output=lightning_logs/%jpl_ddp_test.out
 #SBATCH --error=lightning_logs/%jpl_ddp_test.err
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=2
-#SBATCH --gres=gpu:2
+#SBATCH --ntasks-per-node=1
+#SBATCH --gres=gpu:1
 #SBATCH --time=00:10:00
 #SBATCH --partition=normal
 
