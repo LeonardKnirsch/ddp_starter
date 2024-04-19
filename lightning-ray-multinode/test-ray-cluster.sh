@@ -41,6 +41,6 @@ srun -n $worker_num --nodes=$worker_num --ntasks-per-node=1 --exclude $head_node
 sleep 5
 
 #### call your code below
-conda run -n ray-slurm python examples/test_pytorch-lightning_ray.py
+conda run -n ray-slurm python test_lightning-ray-multinode.py
 
 exit
