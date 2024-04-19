@@ -13,8 +13,8 @@
 #SBATCH --partition=normal
 
 # Load necessary modules
-conda activate mlflow_test
+conda activate friss_oder_stirb
 
 # Run the script
 #srun -ul python test_ddp.py
-srun -ul python mlflow-lightning/test_mlflow_lightning.py
+srun -ul python lightning/test_mlflow_lightning.py
