@@ -9,15 +9,18 @@ from torch.utils.data import DataLoader, TensorDataset
 import lightning.pytorch as pl
 import time
 
-from lightning.pytorch.loggers import MLFlowLogger
-
-# init ML Flow. specific lightning class for more customized interaction
-mlflogger = MLFlowLogger(experiment_name="lightning_logs", tracking_uri="file:./ml-runs")
 
 # init ML flow. Autolog makes your life easy
-#import mlflow
-#os.environ["MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING"] = "true"
-#mlflow.pytorch.autolog()
+# you only want to log on the 0th gpu on the 0th node as to have only one experiment
+# tracked in mlflow
+import mlflow
+nodeid = int(os.environ.get('SLURM_NODEID'))
+procid = int(os.environ.get('SLURM_PROCID'))
+print(f'nodeid {nodeid}, procid {procid}')
+if nodeid == 0 and procid == 0:
+    print('logging enabled')
+    os.environ["MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING"] = "true"
+    mlflow.pytorch.autolog()
 
 # Model, Loss, Optimizer
 class ImageClassifier(pl.LightningModule):
@@ -33,8 +36,6 @@ class ImageClassifier(pl.LightningModule):
         return self.model(x)
 
     def training_step(self, batch, batch_idx):
-        if self.local_rank == 0:
-            self.logger.experiment.log_metric()
         x, y = batch
         outputs = self.forward(x)
         loss = self.criterion(outputs, y)
@@ -69,7 +70,6 @@ if __name__ == "__main__":
         strategy="ddp",
         log_every_n_steps=1,
         num_nodes=num_nodes,
-        logger=mlflogger,
     )
     #trainer.fit(model, data)
     start = time.time()
