@@ -15,8 +15,8 @@
 
 
 # Load necessary modules
-conda activate rayenv
+conda activate friss_oder_stirb
 
 # Run the script
 #srun -ul python test_ddp.py
-srun -ul python pytorch-lightning-ray/test_pytorch-lightning_ray.py
+srun -ul python test_pytorch-lightning_ray.py
