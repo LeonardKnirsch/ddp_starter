@@ -10,7 +10,6 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:2
 #SBATCH --cpus-per-task=128
-#SBATCH --gres=gpu:4
 
 
 # Load modules or your own conda environment here
