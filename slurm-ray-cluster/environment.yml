@@ -1,4 +1,4 @@
-name: rayenvslurm
+name: ray-slurm
 channels:
   - pytorch
   - nvidia
@@ -9,3 +9,5 @@ dependencies:
   - lightning
   - torchvision
   - ray-train
+  - ray-air
+  - ray-tune
