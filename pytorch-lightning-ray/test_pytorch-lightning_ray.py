@@ -11,6 +11,21 @@ import lightning.pytorch as pl
 import ray.train.lightning
 from ray.train.torch import TorchTrainer
 
+# init ML flow. Autolog makes your life easy
+# you only want to log on the 0th gpu on the 0th node as to have only one experiment
+# tracked in mlflow
+# look at the results in a browser window via typing in the terminal:
+# mlflow server --host 127.0.0.1 --port 8044 # any port in the 8xxx should do
+# and then allow VSCode to open the browser window
+import mlflow
+nodeid = int(os.environ.get('SLURM_NODEID'))
+procid = int(os.environ.get('SLURM_PROCID'))
+print(f'nodeid {nodeid}, procid {procid}')
+if nodeid == 0 and procid == 0:
+    print('logging enabled')
+    os.environ["MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING"] = "true"
+    mlflow.pytorch.autolog()
+
 # Model, Loss, Optimizer
 class ImageClassifier(pl.LightningModule):
     def __init__(self):
@@ -84,10 +99,10 @@ total = end - start
 print(f"{num_nodes*device_count} GPUs took {total} seconds.")
 
 # [4] Load the trained model.
-with result.checkpoint.as_directory() as checkpoint_dir:
-    model = ImageClassifier.load_from_checkpoint(
-        os.path.join(
-            checkpoint_dir,
-            ray.train.lightning.RayTrainReportCallback.CHECKPOINT_NAME,
-        ),
-    )
+#with result.checkpoint.as_directory() as checkpoint_dir:
+#    model = ImageClassifier.load_from_checkpoint(
+#        os.path.join(
+#            checkpoint_dir,
+#            ray.train.lightning.RayTrainReportCallback.CHECKPOINT_NAME,
+#        ),
+#    )
