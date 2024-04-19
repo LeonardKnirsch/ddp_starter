@@ -19,4 +19,4 @@ conda activate rayenv
 
 # Run the script
 #srun -ul python test_ddp.py
-srun -ul python test_pytorch-lightning_ray.py
+srun -ul python pytorch-lightning-ray/test_pytorch-lightning_ray.py
