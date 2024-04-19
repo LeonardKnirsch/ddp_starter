@@ -14,30 +14,6 @@ import mlflow
 os.environ["MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING"] = "true"
 mlflow.pytorch.autolog()
 
-class IrisDataModule(pl.LightningDataModule):
-    """Data module for the Iris dataset."""
-
-    def __init__(self):
-        """Initializes the data module."""
-        super().__init__()
-        iris = load_iris()
-        X_train, X_val, y_train, y_val = train_test_split(
-            iris.data, iris.target, test_size=0.2, random_state=42)
-        self.train_data = TensorDataset(
-            torch.tensor(X_train, dtype=torch.float32),
-            torch.tensor(y_train))
-        self.val_data = TensorDataset(
-            torch.tensor(X_val, dtype=torch.float32),
-            torch.tensor(y_val))
-
-    def train_dataloader(self):
-        """Returns a DataLoader for the training data."""
-        return DataLoader(self.train_data, batch_size=32, num_workers=16)
-
-    def val_dataloader(self):
-        """Returns a DataLoader for the validation data."""
-        return DataLoader(self.val_data, batch_size=32, num_workers=16)
-
 # Model, Loss, Optimizer
 class ImageClassifier(pl.LightningModule):
     def __init__(self):
