@@ -27,6 +27,7 @@ cd ddp_starter
 
 Change directory to the demo folder you want to install an environment for (choice of lightning/lightning-ray/lightning-ray-multinode )
 ```
+# cd <lightning/lightning-ray/lightning-ray-multinode>
 cd lightning
 ```
 
