@@ -27,7 +27,7 @@ cd ddp_starter
 
 Create a new conda environment and install dependencies:
 ```
-mamba env create -f environment.yml
+mamba env create -f pinned_env.yml # we have experienced some unresolved dependency issues with environment.yml for now
 ```
 
 Change directory to the demo folder you want to install an environment for:
