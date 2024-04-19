@@ -13,7 +13,7 @@
 #SBATCH --partition=normal
 
 # Load necessary modules
-conda activate ddp_starter
+conda activate mlflow_test
 
 # Run the script
 #srun -ul python test_ddp.py
