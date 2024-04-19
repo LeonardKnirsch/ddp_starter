@@ -25,16 +25,17 @@ git clone git@github.com:LeonardKnirsch/ddp_starter.git
 cd ddp_starter
 ```
 
+Create a new conda environment and install dependencies:
+```
+mamba env create -f environment.yml
+```
+
 Change directory to the demo folder you want to install an environment for:
 ```
 # cd <lightning/lightning-ray/lightning-ray-multinode>
 cd lightning
 ```
 
-Create a new conda environment and install dependencies:
-```
-mamba env create -f environment.yml
-```
 
 ### Usage
 ```
@@ -48,4 +49,4 @@ Then check out the logs in `./lightning_logs` to see if the run was successful.
 ```
 `Trainer.fit` stopped: `max_epochs=10` reached.
 ```
-means that the run was successful.
+means that the run was successful. Alternatively, you can use Mlflow metrics, which are set up for the lightning/ and lightning-ray/ examples.
