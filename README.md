@@ -25,7 +25,7 @@ git clone git@github.com:LeonardKnirsch/ddp_starter.git
 cd ddp_starter
 ```
 
-Change directory to the demo folder you want to install an environment for (choice of lightning/lightning-ray/lightning-ray-multinode )
+Change directory to the demo folder you want to install an environment for:
 ```
 # cd <lightning/lightning-ray/lightning-ray-multinode>
 cd lightning
