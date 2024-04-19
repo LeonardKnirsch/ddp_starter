@@ -13,6 +13,9 @@ import time
 # init ML flow. Autolog makes your life easy
 # you only want to log on the 0th gpu on the 0th node as to have only one experiment
 # tracked in mlflow
+# look at the results in a browser window via typing in the terminal:
+# mlflow server --host 127.0.0.1 --port 8044 # any port in the 8xxx should do
+# and then allow VSCode to open the browser window
 import mlflow
 nodeid = int(os.environ.get('SLURM_NODEID'))
 procid = int(os.environ.get('SLURM_PROCID'))
