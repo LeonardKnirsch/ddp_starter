@@ -13,7 +13,7 @@
 
 
 # Load modules or your own conda environment here
-conda activate ray-slurm
+conda activate friss_oder_stirb
 
 head_node=$(hostname)
 head_node_ip=$(hostname --ip-address)
@@ -41,6 +41,6 @@ srun -n $worker_num --nodes=$worker_num --ntasks-per-node=1 --exclude $head_node
 sleep 5
 
 #### call your code below
-conda run -n ray-slurm python test_lightning-ray-multinode.py
+conda run -n friss_oder_stirb python test_lightning-ray-multinode.py
 
 exit
