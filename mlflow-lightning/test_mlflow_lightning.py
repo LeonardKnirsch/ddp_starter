@@ -9,10 +9,18 @@ from torch.utils.data import DataLoader, TensorDataset
 import lightning.pytorch as pl
 import time
 
+
 # init ML flow. Autolog makes your life easy
+# you only want to log on the 0th gpu on the 0th node as to have only one experiment
+# tracked in mlflow
 import mlflow
-os.environ["MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING"] = "true"
-mlflow.pytorch.autolog()
+nodeid = int(os.environ.get('SLURM_NODEID'))
+procid = int(os.environ.get('SLURM_PROCID'))
+print(f'nodeid {nodeid}, procid {procid}')
+if nodeid == 0 and procid == 0:
+    print('logging enabled')
+    os.environ["MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING"] = "true"
+    mlflow.pytorch.autolog()
 
 # Model, Loss, Optimizer
 class ImageClassifier(pl.LightningModule):
