@@ -6,7 +6,7 @@ This is a collection of tests that were done during the MCH hackathon in April 2
 We mostly worked with [lightning](https://lightning.ai/docs/pytorch/stable/) and tested its scaling capabilites to multiple GPUs. We also tested [mlflow](https://mlflow.org/) for logging certain metrics that might be of interest (e.g. GPU usage). 
 
 ### mlflow-lightning
-This is a extension of a demo we found [here] 
+This is a extension of a demo we found [here](https://docs.ray.io/en/latest/train/getting-started-pytorch-lightning.html)
 ### pytorch-lightning-ray
 todo
 ### slurm-ray-cluster
