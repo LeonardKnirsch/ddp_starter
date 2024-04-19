@@ -1,4 +1,4 @@
-name: rayenv
+name: raytestenv
 channels:
   - pytorch
   - nvidia
@@ -9,3 +9,5 @@ dependencies:
   - lightning
   - torchvision
   - ray-train
+  - ray-air
+  - mlflow
