@@ -1,0 +1,11 @@
+name: rayenvslurm
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - pytorch
+  - pytorch-cuda=11.8
+  - lightning
+  - torchvision
+  - ray-train
