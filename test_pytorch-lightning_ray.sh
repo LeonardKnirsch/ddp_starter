@@ -7,8 +7,8 @@
 #SBATCH --output=lightning_logs/%jpl_ddp_test_ray.out
 #SBATCH --error=lightning_logs/%jpl_ddp_test_ray.err
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=2
-#SBATCH --gres=gpu:2
+#SBATCH --ntasks-per-node=1
+#SBATCH --gres=gpu:1
 #SBATCH --time=00:10:00
 #SBATCH --partition=normal
 
@@ -17,4 +17,4 @@ conda activate rayenv
 
 # Run the script
 #srun -ul python test_ddp.py
-srun -ul python test_imageclassifier_ray.py
+srun -ul python test_pytorch-lightning_ray.py
