@@ -75,17 +75,17 @@ def get_data_loaders(batch_size=64):
     # DataLoader is not threadsafe.
     # For a simple example we just download the data to /tmp, as 
     # /global/homes is not compatible with file locking
-    with FileLock("/tmp/data.lock"):
+    with FileLock("/scratch/mch/lknirsch/tmp/data.lock"):
         train_loader = torch.utils.data.DataLoader(
             datasets.MNIST(
-                "/tmp/data", train=True, download=True, transform=mnist_transforms
+                "/scratch/mch/lknirsch/tmp/data", train=True, download=True, transform=mnist_transforms
             ),
             batch_size=batch_size,
             shuffle=True,
         )
         test_loader = torch.utils.data.DataLoader(
             datasets.MNIST(
-                "/tmp/data", train=False, download=True, transform=mnist_transforms
+                "/scratch/mch/lknirsch/tmp/data", train=False, download=True, transform=mnist_transforms
             ),
             batch_size=batch_size,
             shuffle=True,

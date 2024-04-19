@@ -1,21 +1,20 @@
 #!/bin/bash
 
-#SBATCH -C gpu
+
 #SBATCH --time=00:10:00
-#SBATCH -q debug
-#SBATCH -A nstaff
+#SBATCH --partition=normal
 
 ### This script works for any number of nodes, Ray will find and manage all resources
-#SBATCH --nodes=2
+#SBATCH --nodes=3
 
 ### Give all resources on each node to a single Ray task, ray can manage the resources internally
 #SBATCH --ntasks-per-node=1
-#SBATCH --gpus-per-task=4
 #SBATCH --cpus-per-task=128
+#SBATCH --gres=gpu:4
 
 
 # Load modules or your own conda environment here
-module load pytorch/2.0.1
+conda activate ray-slurm
 
 head_node=$(hostname)
 head_node_ip=$(hostname --ip-address)
@@ -42,6 +41,6 @@ sleep 5
 ##############################################################################################
 
 #### call your code below
-python examples/mnist_pytorch_trainable.py --cuda
+python -u examples/mnist_pytorch_trainable.py --cuda
 
 exit
