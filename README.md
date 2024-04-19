@@ -18,7 +18,7 @@ This combines the above script from lightning-ray with a multi-node slurm setup,
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - Access to a Slurm cluster (we did everything on balfrin.cscs.ch)
 
-### Installation (todo)
+### Installation
 Copy latest code from github:
 ```
 git clone git@github.com:LeonardKnirsch/ddp_starter.git
@@ -42,11 +42,9 @@ cd <folder of interest>
 # If you are in lightning-ray-multinode, then use test-ray-cluster.sh as the sbatch script.
 sbatch <.sh script>
 ```
-TODO
-Then check out the logs in `./lightning_logs` to see if the run was successful. The
-`metrics.csv` contains the training and validation losses across all epochs.
+
+Then check out the logs in `./lightning_logs` to see if the run was successful. 
 ```
 `Trainer.fit` stopped: `max_epochs=10` reached.
 ```
 means that the run was successful.
-TODO
