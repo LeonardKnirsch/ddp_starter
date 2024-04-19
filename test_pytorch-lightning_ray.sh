@@ -7,10 +7,12 @@
 #SBATCH --output=lightning_logs/%jpl_ddp_test_ray.out
 #SBATCH --error=lightning_logs/%jpl_ddp_test_ray.err
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=128
 #SBATCH --time=00:10:00
 #SBATCH --partition=normal
+#SBATCH --ntasks-per-node=1
+#SBATCH --gres=gpu:3
+
 
 # Load necessary modules
 conda activate rayenv
