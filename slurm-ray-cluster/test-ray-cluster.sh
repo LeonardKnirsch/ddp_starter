@@ -5,10 +5,10 @@
 #SBATCH --output=lightning_logs/%j_test_ray_cluster.out
 #SBATCH --error=lightning_logs/%j_test_ray_cluster.err
 ### This script works for any number of nodes, Ray will find and manage all resources
-#SBATCH --nodes=3
+#SBATCH --nodes=2
 ### Give all resources on each node to a single Ray task, ray can manage the resources internally
 #SBATCH --ntasks-per-node=1
-#SBATCH --gres=gpu:2
+#SBATCH --gres=gpu:4
 #SBATCH --cpus-per-task=128
 
 
